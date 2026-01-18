@@ -1,0 +1,83 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider     = "prisma-client-js"
+  engineType   = "client"
+  moduleFormat = "cjs"
+}
+
+model Organization {
+  id String @id @default(uuid())
+
+  name        String
+  inn         String
+  ogrn        String
+  address     String
+  description String?
+  logo        String?
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  resources Resource[]
+
+  @@map("organizations")
+}
+
+model Resource {
+  id String @id @default(uuid())
+
+  name        String
+  contacts    String?
+  description String?
+
+  organizationId String       @map("organization_id")
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+
+  isPrivate Boolean @default(false) @map("is_private")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([organizationId, name])
+  @@map("resources")
+}
+
+model Role {
+  id String @id @default(uuid())
+
+  code        String  @unique
+  name        String
+  description String?
+
+  users User[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("roles")
+}
+
+model User {
+  id String @id @default(uuid())
+
+  firstName  String  @map("first_name")
+  lastName   String  @map("last_name")
+  patronymic String?
+  email      String  @unique
+  password   String
+  phone      String
+  isBanned   Boolean @default(false) @map("is_banned")
+
+  roleId String @map("role_id")
+  role   Role   @relation(fields: [roleId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([email])
+  @@index([phone])
+  @@map("users")
+}

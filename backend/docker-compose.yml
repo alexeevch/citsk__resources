@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: gos-systems-postgres
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - gos-systems-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: gos-systems-redis
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    networks:
+      - gos-systems-network
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+    name: gos-systems-postgres-data
+  redis_data:
+    name: gos-systems-redis-data
+
+networks:
+  gos-systems-network:
+    name: gos-systems-network
+    driver: bridge
