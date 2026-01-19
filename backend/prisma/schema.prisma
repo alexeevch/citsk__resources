@@ -11,12 +11,15 @@ generator client {
 model Organization {
   id String @id @default(uuid())
 
+  inn  String @unique
+  ogrn String @unique
+
   name        String
-  inn         String
-  ogrn        String
   address     String
   description String?
   logo        String?
+
+  sortIndex Int @default(500) @map("sort_index")
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -24,6 +27,22 @@ model Organization {
   resources Resource[]
 
   @@map("organizations")
+}
+
+model ResourceCategory {
+  id String @id @default(uuid())
+
+  name  String @unique
+  label String
+
+  sortIndex Int @default(500) @map("sort_index")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  resources Resource[]
+
+  @@map("resource_categories")
 }
 
 model Resource {
@@ -35,6 +54,9 @@ model Resource {
 
   organizationId String       @map("organization_id")
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+
+  categoryId String           @map("category_id")
+  category   ResourceCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
 
   isPrivate Boolean @default(false) @map("is_private")
 
@@ -78,6 +100,17 @@ model User {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@index([email])
-  @@index([phone])
   @@map("users")
+}
+
+model Alert {
+  id String @id @default(uuid())
+
+  message  String
+  isActvie Boolean @default(true) @map("is_active")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("alerts")
 }
