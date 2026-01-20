@@ -30,6 +30,7 @@ CREATE TABLE "resource_categories" (
 CREATE TABLE "resources" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "link" TEXT NOT NULL,
     "contacts" TEXT,
     "description" TEXT,
     "organization_id" TEXT NOT NULL,

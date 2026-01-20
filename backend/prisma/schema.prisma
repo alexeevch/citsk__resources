@@ -49,6 +49,7 @@ model Resource {
   id String @id @default(uuid())
 
   name        String
+  link        String
   contacts    String?
   description String?
 

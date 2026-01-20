@@ -1,9 +1,18 @@
-import { IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsUrl,
+} from 'class-validator';
 
 export class CreateResourceDto {
   @IsString()
   @IsNotEmpty()
   name: string;
+
+  @IsUrl()
+  link: string;
 
   @IsString()
   @IsNotEmpty()
