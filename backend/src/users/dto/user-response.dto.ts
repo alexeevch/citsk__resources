@@ -1,14 +1,14 @@
-import { Exclude, Expose, Type } from 'class-transformer';
+import { Exclude, Expose, Transform, Type } from 'class-transformer';
 
 export class RoleResponseDto {
   @Expose()
   id: string;
 
   @Expose()
-  code: string;
+  name: string;
 
   @Expose()
-  name: string;
+  label: string;
 }
 
 export class UserResponseDto {
@@ -22,7 +22,7 @@ export class UserResponseDto {
   lastName: string;
 
   @Expose()
-  patronymic?: string;
+  patronymic?: string | null;
 
   @Expose()
   email: string;
