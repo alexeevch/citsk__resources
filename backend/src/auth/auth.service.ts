@@ -2,7 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { Role, User } from '@prisma/client';
+import { UserWithRole } from '../users/users.types';
+import { JWTPayload } from './auth.types';
+import { plainToInstance } from 'class-transformer';
+import { UserResponseDto } from '../users/dto/user-response.dto';
 
 @Injectable()
 export class AuthService {
@@ -12,7 +15,7 @@ export class AuthService {
   ) {}
 
   async validateUser(email: string, password: string) {
-    const user = await this.usersService.findByEmail(email);
+    const user = await this.usersService.findByEmail(email, true);
     if (!user) return null;
 
     const isValid = await bcrypt.compare(password, user.password);
@@ -21,14 +24,15 @@ export class AuthService {
     return user;
   }
 
-  login(user: User & { role: Role }) {
-    const payload = {
-      sub: user.id,
-      role: user.role.code,
+  login(user: UserWithRole) {
+    const payload: JWTPayload = {
+      id: user.id,
+      role: user.role.name,
     };
 
     return {
       access_token: this.jwtService.sign(payload),
+      user: plainToInstance(UserResponseDto, user),
     };
   }
 }

@@ -1,12 +1,10 @@
-import { Controller, Post, UseGuards, Request } from '@nestjs/common';
+import { Controller, Post, Request, UseGuards } from '@nestjs/common';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { AuthService } from './auth.service';
 import { Request as ExpressReq } from 'express';
-import { Role, User } from '@prisma/client';
+import { UserWithRole } from '../users/users.types';
 
-type AuthenticatedRequest = ExpressReq & {
-  user: User & { role: Role };
-};
+type AuthenticatedRequest = ExpressReq & { user: UserWithRole };
 
 @Controller('auth')
 export class AuthController {
@@ -16,8 +14,8 @@ export class AuthController {
   @Post('login')
   login(
     @Request()
-    req: AuthenticatedRequest,
+    request: AuthenticatedRequest,
   ) {
-    return this.authService.login(req.user);
+    return this.authService.login(request.user);
   }
 }
