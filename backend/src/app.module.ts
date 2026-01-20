@@ -7,7 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import KeyvRedis from '@keyv/redis';
 import { PrismaModule } from './prisma/prisma.module';
-import { UsersController } from './users/users.controller';
+import { OrganizationsModule } from './organizations/organizations.module';
 import Joi from 'joi';
 
 @Module({
@@ -41,8 +41,9 @@ import Joi from 'joi';
     PrismaModule,
     AuthModule,
     UsersModule,
+    OrganizationsModule,
   ],
-  controllers: [AppController, UsersController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
