@@ -9,6 +9,7 @@ import KeyvRedis from '@keyv/redis';
 import { PrismaModule } from './prisma/prisma.module';
 import { OrganizationsModule } from './organizations/organizations.module';
 import { ResourceCategoriesModule } from './resource-categories/resource-categories.module';
+import { RolesModule } from './roles/roles.module';
 import Joi from 'joi';
 
 @Module({
@@ -44,6 +45,7 @@ import Joi from 'joi';
     UsersModule,
     OrganizationsModule,
     ResourceCategoriesModule,
+    RolesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
