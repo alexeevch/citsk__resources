@@ -13,9 +13,9 @@ import express from 'express';
 import { ResourcesService } from './resources.service';
 import { CreateResourceDto } from './dto/create-resource.dto';
 import { UpdateResourceDto } from './dto/update-resource.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { RolesGuard } from '../auth/guards/role.guard';
-import { Roles } from '../auth/decorators/role.decorator';
+import { JwtAuthGuard } from '../auth/common/guards/jwt-auth.guard';
+import { RolesGuard } from '../auth/common/guards/role.guard';
+import { Roles } from '../auth/common/decorators/role.decorator';
 
 @Controller('resources')
 export class ResourcesController {

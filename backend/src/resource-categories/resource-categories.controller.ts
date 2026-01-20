@@ -11,9 +11,9 @@ import {
 import { ResourceCategoriesService } from './resource-categories.service';
 import { CreateResourceCategoryDto } from './dto/create-resource-category.dto';
 import { UpdateResourceCategoryDto } from './dto/update-resource-category.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { RolesGuard } from '../auth/guards/role.guard';
-import { Roles } from '../auth/decorators/role.decorator';
+import { JwtAuthGuard } from '../auth/common/guards/jwt-auth.guard';
+import { RolesGuard } from '../auth/common/guards/role.guard';
+import { Roles } from '../auth/common/decorators/role.decorator';
 
 @Controller('resource-categories')
 export class ResourceCategoriesController {

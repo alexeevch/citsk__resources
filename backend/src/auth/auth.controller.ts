@@ -1,8 +1,8 @@
 import { Controller, Post, Request, UseGuards } from '@nestjs/common';
-import { LocalAuthGuard } from './guards/local-auth.guard';
+import { LocalAuthGuard } from './common/guards/local-auth.guard';
 import { AuthService } from './auth.service';
 import { Request as ExpressReq } from 'express';
-import { UserWithRole } from '../users/users.types';
+import { UserWithRole } from '../users/common/users.types';
 
 type AuthenticatedRequest = ExpressReq & { user: UserWithRole };
 

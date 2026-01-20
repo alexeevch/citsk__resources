@@ -11,9 +11,9 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserResponseDto } from './dto/user-response.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { RolesGuard } from '../auth/guards/role.guard';
-import { Roles } from '../auth/decorators/role.decorator';
+import { JwtAuthGuard } from '../auth/common/guards/jwt-auth.guard';
+import { RolesGuard } from '../auth/common/guards/role.guard';
+import { Roles } from '../auth/common/decorators/role.decorator';
 
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Roles('ROOT')

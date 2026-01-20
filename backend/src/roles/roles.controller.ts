@@ -11,9 +11,9 @@ import {
 import { RolesService } from './roles.service';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
-import { RolesGuard } from '../auth/guards/role.guard';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { Roles } from '../auth/decorators/role.decorator';
+import { RolesGuard } from '../auth/common/guards/role.guard';
+import { JwtAuthGuard } from '../auth/common/guards/jwt-auth.guard';
+import { Roles } from '../auth/common/decorators/role.decorator';
 
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Roles('ROOT')

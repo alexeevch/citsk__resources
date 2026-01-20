@@ -11,9 +11,9 @@ import {
 import { OrganizationsService } from './organizations.service';
 import { CreateOrganizationDto } from './dto/create-organization.dto';
 import { UpdateOrganizationDto } from './dto/update-organization.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { RolesGuard } from '../auth/guards/role.guard';
-import { Roles } from '../auth/decorators/role.decorator';
+import { JwtAuthGuard } from '../auth/common/guards/jwt-auth.guard';
+import { RolesGuard } from '../auth/common/guards/role.guard';
+import { Roles } from '../auth/common/decorators/role.decorator';
 
 @Controller('organizations')
 export class OrganizationsController {

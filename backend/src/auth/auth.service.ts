@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { UserWithRole } from '../users/users.types';
-import { JWTPayload } from './auth.types';
+import { UserWithRole } from '../users/common/users.types';
+import { JWTPayload } from './common/auth.types';
 import { plainToInstance } from 'class-transformer';
 import { UserResponseDto } from '../users/dto/user-response.dto';
 
