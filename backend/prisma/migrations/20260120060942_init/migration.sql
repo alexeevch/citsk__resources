@@ -44,8 +44,8 @@ CREATE TABLE "resources" (
 -- CreateTable
 CREATE TABLE "roles" (
     "id" TEXT NOT NULL,
-    "code" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "label" TEXT NOT NULL,
     "description" TEXT,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
@@ -94,7 +94,7 @@ CREATE UNIQUE INDEX "resource_categories_name_key" ON "resource_categories"("nam
 CREATE UNIQUE INDEX "resources_organization_id_name_key" ON "resources"("organization_id", "name");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "roles_code_key" ON "roles"("code");
+CREATE UNIQUE INDEX "roles_name_key" ON "roles"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");

@@ -12,7 +12,7 @@ export async function userRootSeeder(prisma: PrismaClient) {
   };
 
   const rootRole = await prisma.role.findUnique({
-    where: { code: 'ROOT' },
+    where: { name: 'ROOT' },
   });
   if (!rootRole) {
     throw new Error('ROOT role not found');

@@ -2,14 +2,14 @@ import { PrismaClient } from '@prisma/client';
 
 const data = [
   {
-    code: 'ADMIN',
-    name: 'Администратор системы',
+    name: 'ADMIN',
+    label: 'Администратор системы',
     description:
       'Пользователь, имеющий права добавлять, удалять, обновлять информационные системы',
   },
   {
-    code: 'ROOT',
-    name: 'Босс',
+    name: 'ROOT',
+    label: 'Босс',
     description:
       'Пользователь, обладающий всеми возможными правами, включая удаление и добавление пользователей',
   },
@@ -18,9 +18,9 @@ const data = [
 export async function seedRoles(prisma: PrismaClient) {
   for (const role of data) {
     await prisma.role.upsert({
-      where: { code: role.code },
+      where: { name: role.name },
       update: {
-        name: role.name,
+        label: role.label,
         description: role.description,
       },
       create: role,
