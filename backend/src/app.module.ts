@@ -10,6 +10,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { OrganizationsModule } from './organizations/organizations.module';
 import { ResourceCategoriesModule } from './resource-categories/resource-categories.module';
 import { RolesModule } from './roles/roles.module';
+import { ResourcesModule } from './resources/resources.module';
 import Joi from 'joi';
 
 @Module({
@@ -46,6 +47,7 @@ import Joi from 'joi';
     OrganizationsModule,
     ResourceCategoriesModule,
     RolesModule,
+    ResourcesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
