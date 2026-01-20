@@ -15,11 +15,11 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/role.guard';
 import { Roles } from '../auth/decorators/role.decorator';
 
-@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('organizations')
 export class OrganizationsController {
   constructor(private readonly organizationsService: OrganizationsService) {}
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('ADMIN')
   @Post()
   create(@Body() createOrganizationDto: CreateOrganizationDto) {
@@ -36,6 +36,7 @@ export class OrganizationsController {
     return this.organizationsService.findOne(id);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('ADMIN')
   @Patch(':id')
   update(
@@ -45,6 +46,7 @@ export class OrganizationsController {
     return this.organizationsService.update(id, updateOrganizationDto);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('ADMIN')
   @Delete(':id')
   remove(@Param('id') id: string) {
