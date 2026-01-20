@@ -7,7 +7,9 @@ import {
   Param,
   Delete,
   UseGuards,
+  Req,
 } from '@nestjs/common';
+import express from 'express';
 import { ResourcesService } from './resources.service';
 import { CreateResourceDto } from './dto/create-resource.dto';
 import { UpdateResourceDto } from './dto/update-resource.dto';
@@ -27,8 +29,11 @@ export class ResourcesController {
   }
 
   @Get()
-  findAll() {
-    return this.resourcesService.findAll();
+  findAll(@Req() req: express.Request) {
+    const clientIp =
+      req.headers['x-forwarded-for']?.toString().split(',')[0] ?? req.ip;
+
+    return this.resourcesService.findAll(clientIp);
   }
 
   @Get(':id')

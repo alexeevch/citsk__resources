@@ -17,6 +17,7 @@ import Joi from 'joi';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      cache: true,
       validationSchema: Joi.object({
         NODE_ENV: Joi.string()
           .valid('development', 'production', 'test')
